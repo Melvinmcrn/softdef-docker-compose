@@ -19,6 +19,8 @@ services:
       - 3306:3306
     expose:
       - 3306
+    volumes: 
+      - dbdata:/var/lib/mysql
 
   server:
     build: server
@@ -30,3 +32,6 @@ services:
       - 8000:8000
     expose:
       - 8000
+
+volumes: 
+  dbdata:
