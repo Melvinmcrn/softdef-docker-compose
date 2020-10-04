@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  webapp:
+    build: webapp
+    image: webapp
+    container_name: webapp
+    stdin_open: true
+    ports:
+      - 3000:3000
+
+  db:
+    build: db
+    image: db
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+
+  server:
+    build: server
+    image: server
+    container_name: server
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    expose:
+      - 8000
